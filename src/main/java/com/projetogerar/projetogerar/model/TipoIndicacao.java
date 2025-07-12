@@ -4,5 +4,5 @@ public enum TipoIndicacao {
     Maternidade,
     Obstetra,
     Doula,
-    ONGS
+    ONG
 }
