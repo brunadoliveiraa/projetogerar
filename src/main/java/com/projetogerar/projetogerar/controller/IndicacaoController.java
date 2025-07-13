@@ -6,6 +6,7 @@ import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/indicacao")
@@ -15,6 +16,11 @@ public class IndicacaoController {
 
     public IndicacaoController(IndicacaoServiceInterface service) {
         this.service = service;
+    }
+
+    @GetMapping("/{id}")
+    public Optional<Indicacao> buscarPorId(@PathVariable int id) {
+        return service.buscarPorId(id);
     }
 
     @GetMapping
