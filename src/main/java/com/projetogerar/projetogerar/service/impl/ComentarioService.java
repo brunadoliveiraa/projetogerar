@@ -53,6 +53,10 @@ public class ComentarioService implements ComentarioServiceInterface {
 
     @Override
     public void deletar(int id) {
+        Comentario comentario = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Comentario com id " + id +" não encontrado."));
+
         repository.deleteById(id);
+        indicacaoService.removerNota(comentario.getIndicacao().getId(), comentario.getNota());
     }
 }

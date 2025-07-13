@@ -55,6 +55,18 @@ public class IndicacaoService implements IndicacaoServiceInterface {
     }
 
     @Override
+    public Indicacao removerNota(int id, int nota) {
+        return repository.findById(id)
+                .map(indicacaoExistente -> {
+                    indicacaoExistente.setNumNotas(indicacaoExistente.getNumNotas()-1);
+                    indicacaoExistente.setSumNotas(indicacaoExistente.getSumNotas()-nota);
+
+                    return repository.save(indicacaoExistente);
+                })
+                .orElseThrow(() -> new RuntimeException("Indicacao com id " + id +" não encontrada."));
+    }
+
+    @Override
     public Indicacao atualizarNota(int id, int notaAntiga, int notaNova) {
         return repository.findById(id)
                 .map(indicacaoExistente -> {
